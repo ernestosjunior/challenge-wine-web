@@ -52,7 +52,7 @@ export function Header({ itemsOnBox = 0 }: HeaderProps) {
 
 const headerOptions = [
   { label: 'Clube', path: 'clube' },
-  { label: 'Loja', path: 'loja' },
+  { label: 'Loja', path: '/' },
   { label: 'Produtores', path: 'produtores' },
   { label: 'Ofertas', path: 'ofertas' },
   { label: 'Eventos', path: 'eventos' },

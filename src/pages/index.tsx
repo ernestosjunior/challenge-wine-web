@@ -1,5 +1,5 @@
-import { Header } from '../components'
+import { BaseLayout } from '../templates'
 
 export default function Home() {
-  return <Header />
+  return <BaseLayout />
 }
