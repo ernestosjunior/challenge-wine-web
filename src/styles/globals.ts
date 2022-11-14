@@ -130,9 +130,7 @@ table {
 
 }
 body{
-  font-family: 'Lato', sans-serif;
-}
-body{
   background: #f5f5f5;
+  font-family: 'Lato', sans-serif;
 }
 `

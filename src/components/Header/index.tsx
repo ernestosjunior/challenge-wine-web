@@ -2,8 +2,10 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import logo from '../../assets/logo-black.svg'
 import search from '../../assets/search-icon.svg'
+import searchMobile from '../../assets/search-mobile.svg'
 import acount from '../../assets/acount-icon.svg'
 import wineBox from '../../assets/wineBox.svg'
+import menu from '../../assets/menu-icon.svg'
 import * as S from './styles'
 
 export interface HeaderProps {
@@ -17,6 +19,7 @@ export function Header({ itemsOnBox = 0 }: HeaderProps) {
     <S.Header headerHeight={88}>
       <S.Left>
         {' '}
+        <Image src={menu} alt="Botão abrir menu" />
         <Image src={logo} alt="Logo Wine" />
         <S.ContainerOptions>
           {headerOptions.map(({ label, path }) => (
@@ -33,6 +36,7 @@ export function Header({ itemsOnBox = 0 }: HeaderProps) {
         </S.ContainerOptions>
       </S.Left>
       <S.IconsSection>
+        <Image src={searchMobile} alt="Botão de busca" />
         <Image src={search} alt="Botão de busca" />
         <Image src={acount} alt="Botão para a conta" />
         <S.WineBox>

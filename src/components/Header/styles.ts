@@ -7,7 +7,13 @@ export const Header = styled.header`
   height: ${(props: { headerHeight: number }) => props.headerHeight}px;
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 0px 150px;
+  padding: 0px 5rem;
+  width: 100vw;
+
+  @media (max-width: 1199px) {
+    padding: 0px 18px;
+    height: 72px;
+  }
 `
 export const WineBox = styled.div`
   display: flex;
@@ -46,17 +52,42 @@ export const IconsSection = styled.div`
   img {
     cursor: pointer;
   }
+
+  @media (max-width: 1199px) {
+    > img:first-child {
+      display: block;
+    }
+    > img {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    > img:first-child {
+      display: none;
+    }
+  }
 `
 export const Left = styled.div`
   display: flex;
   align-items: center;
   gap: 82px;
+
+  @media (min-width: 1200px) {
+    > img:first-child {
+      display: none;
+    }
+  }
 `
 
 export const ContainerOptions = styled.div`
   display: flex;
   align-items: center;
   gap: 48px;
+
+  @media (max-width: 1199px) {
+    display: none;
+  }
 `
 export const RedirectButton = styled.button`
   all: unset;
