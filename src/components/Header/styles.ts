@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Header = styled.header`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,7 +9,6 @@ export const Header = styled.header`
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0px 5rem;
-  width: 100vw;
 
   @media (max-width: 1199px) {
     padding: 0px 18px;

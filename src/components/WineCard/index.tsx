@@ -2,16 +2,14 @@ import * as S from './styles'
 import Image from 'next/image'
 import { formatPrice } from '../../utils/formatPrice'
 
-export type WineSmall = {
+export type WineProps = {
+  id: number
   image: string
   name: string
   price: number
   discount: number
   priceMember: number
   priceNonMember: number
-}
-
-export interface WineFull extends WineSmall {
   type: string
   classification: string
   size: string
@@ -23,7 +21,7 @@ export interface WineFull extends WineSmall {
   sommelierComment: string
 }
 
-export function WineCard(wine: WineSmall) {
+export function WineCard(wine: WineProps) {
   if (!Object.keys(wine).length) return null
 
   const { image, name, price, discount, priceMember, priceNonMember } = wine

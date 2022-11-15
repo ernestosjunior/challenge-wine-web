@@ -16,6 +16,12 @@ export const Card = styled.article`
   justify-content: center;
   align-items: center;
   padding: 9px 28px 21px 28px;
+  flex: 1;
+
+  @media (max-width: 1199px) {
+    width: 156px;
+    padding: 16px 16px 6px 16px;
+  }
 `
 
 export const Name = styled.h1`
@@ -87,6 +93,7 @@ export const LabelNonMemberPrice = styled.p`
 `
 export const Button = styled.button`
   all: unset;
+  cursor: pointer;
   background: #7ebc43;
   box-shadow: 0px 0.973384px 1.94677px rgba(0, 0, 0, 0.2);
   border-radius: 3.89354px;
@@ -97,4 +104,8 @@ export const Button = styled.button`
   font-weight: 700;
   font-size: 14px;
   text-transform: uppercase;
+
+  @media (max-width: 1199px) {
+    width: 156px;
+  }
 `
