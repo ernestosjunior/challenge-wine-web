@@ -17,8 +17,14 @@ export const OptionText = styled.span`
   line-height: 17px;
   color: #1d1d1b;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
+
+  input[type='radio'] {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
 `
 
 export const Title = styled.h1`

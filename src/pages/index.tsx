@@ -1,7 +1,6 @@
 import { BaseLayout } from '../templates'
 import styled from 'styled-components'
 import { WineCard, WineProps } from '../components'
-import { useEffect, useState } from 'react'
 import useDeviceSize from '../hooks/useDeviceSize'
 
 interface HomeProps {

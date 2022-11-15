@@ -11,7 +11,11 @@ export function Filter({ filter, setFilter }: FilterProps) {
     <S.Form>
       <S.Title>Refine sua busca</S.Title>
       <S.Subtitle>Por Preço</S.Subtitle>
-      <RadioGroup name="filter" selectedValue={filter} onChange={setFilter}>
+      <RadioGroup
+        name="filter"
+        selectedValue={filter}
+        onChange={(value) => setFilter(value)}
+      >
         <S.OptionText>
           <Radio value="0-40" />
           <span>Até R$40</span>
