@@ -18,9 +18,8 @@ export function Header({ itemsOnBox = 0 }: HeaderProps) {
   return (
     <S.Header headerHeight={88}>
       <S.Left>
-        {' '}
         <Image src={menu} alt="Botão abrir menu" />
-        <Image src={logo} alt="Logo Wine" />
+        <Image src={logo} alt="Logo Wine" onClick={() => router.push('/')} />
         <S.ContainerOptions>
           {headerOptions.map(({ label, path }) => (
             <S.RedirectButton
@@ -29,6 +28,7 @@ export function Header({ itemsOnBox = 0 }: HeaderProps) {
                 router.push(path)
               }}
               key={label}
+              active={path === router.asPath}
             >
               {label}
             </S.RedirectButton>
@@ -51,9 +51,9 @@ export function Header({ itemsOnBox = 0 }: HeaderProps) {
 }
 
 const headerOptions = [
-  { label: 'Clube', path: 'clube' },
+  { label: 'Clube', path: '/clube' },
   { label: 'Loja', path: '/' },
-  { label: 'Produtores', path: 'produtores' },
-  { label: 'Ofertas', path: 'ofertas' },
-  { label: 'Eventos', path: 'eventos' },
+  { label: 'Produtores', path: '/produtores' },
+  { label: 'Ofertas', path: '/ofertas' },
+  { label: 'Eventos', path: '/eventos' },
 ]

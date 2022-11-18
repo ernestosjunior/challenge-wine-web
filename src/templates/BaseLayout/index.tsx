@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Header, Filter } from '../../components'
 import * as S from './styles'
 import { useRoot } from '../../hooks/useRoot'
+import { useRouter } from 'next/router'
 
 export interface BaseLayoutProps {
   children?: React.ReactNode
@@ -10,7 +11,12 @@ export interface BaseLayoutProps {
 
 export function BaseLayout({ children, showFilter = false }: BaseLayoutProps) {
   const { filter, setFilter } = useRoot()
-  console.log(filter)
+  const router = useRouter()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [router.asPath])
+
   return (
     <>
       <Header itemsOnBox={0} />

@@ -2,6 +2,10 @@ import { BaseLayout } from '../templates'
 import styled from 'styled-components'
 import { WineCard, WineProps } from '../components'
 import useDeviceSize from '../hooks/useDeviceSize'
+import { useRoot } from '../hooks/useRoot'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { api } from '../lib/api'
 
 interface HomeProps {
   wines: WineProps[]
@@ -10,8 +14,16 @@ interface HomeProps {
 
 export default function Home({ wines, totalItems }: HomeProps) {
   const [width] = useDeviceSize()
+  const { filter } = useRoot()
+  const router = useRouter()
 
   const isDesktop = Boolean(width && width >= 1200)
+  const isMobile = Boolean(width && width <= 480)
+
+  useEffect(() => {
+    router.replace(router.asPath)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter])
 
   return (
     <BaseLayout showFilter={isDesktop}>
@@ -19,7 +31,7 @@ export default function Home({ wines, totalItems }: HomeProps) {
         <h1>
           <strong>{totalItems}</strong> produtos encontrados
         </h1>
-        <List>
+        <List isMobile={isMobile}>
           {wines.map((wine: WineProps) => (
             <WineCard key={String(wine.id)} {...wine} />
           ))}
@@ -27,6 +39,12 @@ export default function Home({ wines, totalItems }: HomeProps) {
       </Main>
     </BaseLayout>
   )
+}
+
+export async function getServerSideProps() {
+  const { data } = await api.get('/products')
+
+  return { props: { wines: data.items, totalItems: data.totalItems } }
 }
 
 const Main = styled.main`
@@ -44,17 +62,9 @@ const Main = styled.main`
 const List = styled.section`
   display: flex;
   flex-wrap: wrap;
-  justify-content: stretch;
+  justify-content: ${(props: { isMobile: boolean }) =>
+    props.isMobile ? 'center' : 'stretch'};
   align-itens: center;
   gap: 32px;
   flex: 1;
 `
-
-export async function getServerSideProps() {
-  const res = await fetch(
-    'https://wine-back-test.herokuapp.com/products?page=1'
-  )
-  const data = await res.json()
-
-  return { props: { wines: data.items, totalItems: data.totalItems } }
-}

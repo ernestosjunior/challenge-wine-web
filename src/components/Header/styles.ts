@@ -8,7 +8,7 @@ export const Header = styled.header`
   height: ${(props: { headerHeight: number }) => props.headerHeight}px;
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 0px 5rem;
+  padding: 0px 1.5rem;
 
   @media (max-width: 1199px) {
     padding: 0px 18px;
@@ -89,11 +89,16 @@ export const ContainerOptions = styled.div`
     display: none;
   }
 `
+
 export const RedirectButton = styled.button`
   all: unset;
-  color: #555555;
+  color: ${(props: { active: boolean }) =>
+    props.active ? '#D14B8F' : '#555555'};
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
   cursor: pointer;
+  height: 88px;
+  border-bottom: ${(props: { active: boolean }) =>
+    props.active && '2px solid #D14B8F'};
 `

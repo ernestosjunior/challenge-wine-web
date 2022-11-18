@@ -32,10 +32,11 @@ export function WineCard(wine: WineProps) {
     <S.Container>
       <S.Card>
         <Image
-          width={198.57}
-          height={178.13}
+          width={198}
+          height={178}
           src={image}
           alt={`Imagem do ${name}`}
+          style={{ objectFit: 'contain' }}
         />
         <S.Name>{name}</S.Name>
         <S.ContainerValues>
