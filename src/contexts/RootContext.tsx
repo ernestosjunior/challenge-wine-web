@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from 'react'
+import { useRouter } from 'next/router'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 
 export interface RootContextProps {
   filter: string
@@ -13,6 +14,15 @@ interface RootProviderProps {
 
 export function RootProvider({ children }: RootProviderProps) {
   const [filter, setFilter] = useState('')
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push({
+      pathname: '/',
+      query: { ...router.query, filter: filter },
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter])
 
   return (
     <RootContext.Provider value={{ filter, setFilter }}>

@@ -33,7 +33,7 @@ export function Filter({ filter, setFilter }: FilterProps) {
           <span>R$200 A R$500</span>
         </S.OptionText>
         <S.OptionText>
-          <Radio value="500" />
+          <Radio value="500-9999" />
           <span>Acima de R$500</span>
         </S.OptionText>
       </RadioGroup>

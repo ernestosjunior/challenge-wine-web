@@ -1,59 +1,88 @@
 import { BaseLayout } from '../templates'
+import { NextPageContext } from 'next'
 import styled from 'styled-components'
-import { WineCard, WineProps } from '../components'
+import { WineCard, WineProps, Paginate } from '../components'
 import useDeviceSize from '../hooks/useDeviceSize'
-import { useRoot } from '../hooks/useRoot'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { api } from '../lib/api'
 
 interface HomeProps {
   wines: WineProps[]
   totalItems: number
+  totalPages: number
 }
 
-export default function Home({ wines, totalItems }: HomeProps) {
+export default function Home({ wines, totalItems, totalPages }: HomeProps) {
   const [width] = useDeviceSize()
-  const { filter } = useRoot()
   const router = useRouter()
 
   const isDesktop = Boolean(width && width >= 1200)
   const isMobile = Boolean(width && width <= 480)
 
-  useEffect(() => {
-    router.replace(router.asPath)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter])
+  function handlePageClick(e: any) {
+    router.push({
+      pathname: '/',
+      query: { ...router.query, page: String(e.selected + 1) },
+    })
+  }
 
   return (
     <BaseLayout showFilter={isDesktop}>
       <Main>
-        <h1>
-          <strong>{totalItems}</strong> produtos encontrados
-        </h1>
-        <List isMobile={isMobile}>
-          {wines.map((wine: WineProps) => (
-            <WineCard key={String(wine.id)} {...wine} />
-          ))}
-        </List>
+        {!wines.length ? (
+          <h2>Nenhum produto encontrado! ;(</h2>
+        ) : (
+          <>
+            <h1>
+              <strong>{totalItems}</strong> produtos encontrados
+            </h1>
+            <List isMobile={isMobile}>
+              {wines.map((wine: WineProps) => (
+                <WineCard key={String(wine.id)} {...wine} />
+              ))}
+            </List>
+            <Paginate
+              handlePageClick={handlePageClick}
+              pageCount={totalPages}
+              pageRangeDisplayed={3}
+            />
+          </>
+        )}
       </Main>
     </BaseLayout>
   )
 }
 
-export async function getServerSideProps() {
-  const { data } = await api.get('/products')
+export async function getServerSideProps(context: NextPageContext) {
+  if (!context.query.page) context.query.page = '1'
+  if (!context.query.limit) context.query.limit = '10'
 
-  return { props: { wines: data.items, totalItems: data.totalItems } }
+  const query = context.query.filter
+    ? `/products?page=${context.query.page}&limit=${context.query.limit}&filter=${context.query.filter}`
+    : `/products?page=${context.query.page}&limit=${context.query.limit}`
+
+  const { data } = await api.get(query)
+
+  return {
+    props: {
+      wines: data.items,
+      totalItems: data.totalItems,
+      totalPages: data.totalPages,
+    },
+  }
 }
 
 const Main = styled.main`
-  > h1 {
+  > h1,
+  h2 {
     margin-bottom: 32px;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     color: #262626;
+  }
+  > h2 {
+    text-align: center;
   }
   strong {
     font-weight: 700;
