@@ -1,6 +1,7 @@
 import * as S from './styles'
 import Image from 'next/image'
 import { formatPrice } from '../../utils/formatPrice'
+import { useRouter } from 'next/router'
 
 export type WineProps = {
   id: number
@@ -21,16 +22,27 @@ export type WineProps = {
   sommelierComment: string
 }
 
-export function WineCard(wine: WineProps) {
+interface WineCardProps {
+  wine: WineProps
+  setWine: (state: WineProps) => void
+}
+
+export function WineCard({ wine, setWine }: WineCardProps) {
+  const router = useRouter()
   if (!Object.keys(wine).length) return null
 
-  const { image, name, price, discount, priceMember, priceNonMember } = wine
+  const { id, image, name, price, discount, priceMember, priceNonMember } = wine
 
   const hasDiscount = discount > 0
 
   return (
     <S.Container>
-      <S.Card>
+      <S.Card
+        onClick={() => {
+          setWine(wine)
+          router.push(`/vinhos/${id}`)
+        }}
+      >
         <Image
           width={198}
           height={178}

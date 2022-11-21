@@ -5,6 +5,7 @@ import { WineCard, WineProps, Paginate } from '../components'
 import useDeviceSize from '../hooks/useDeviceSize'
 import { useRouter } from 'next/router'
 import { api } from '../lib/api'
+import { useRoot } from '../hooks/useRoot'
 
 interface HomeProps {
   wines: WineProps[]
@@ -15,6 +16,7 @@ interface HomeProps {
 export default function Home({ wines, totalItems, totalPages }: HomeProps) {
   const [width] = useDeviceSize()
   const router = useRouter()
+  const { setWine } = useRoot()
 
   const isDesktop = Boolean(width && width >= 1200)
   const isMobile = Boolean(width && width <= 480)
@@ -38,7 +40,7 @@ export default function Home({ wines, totalItems, totalPages }: HomeProps) {
             </h1>
             <List isMobile={isMobile}>
               {wines.map((wine: WineProps) => (
-                <WineCard key={String(wine.id)} {...wine} />
+                <WineCard key={String(wine.id)} wine={wine} setWine={setWine} />
               ))}
             </List>
             <Paginate
