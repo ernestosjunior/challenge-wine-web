@@ -8,7 +8,7 @@ export const Header = styled.header`
   height: ${(props: { headerHeight: number }) => props.headerHeight}px;
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 0px 1.2rem;
+  padding: 0px 3rem;
 
   @media (max-width: 1199px) {
     padding: 0px 18px;

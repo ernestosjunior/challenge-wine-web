@@ -6,8 +6,8 @@ export const Container = styled.main`
 export const Main = styled.section`
   margin-top: 38px;
   display: flex;
-  gap: 60px;
-  padding: 0 24px;
+  gap: 8%;
+  padding: 0 3rem;
 
   > main {
     flex: 1;

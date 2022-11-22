@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter, Router } from 'next/router'
 import { WineProps } from '../components'
 import { createContext, ReactNode, useEffect, useState } from 'react'
 
@@ -21,14 +21,16 @@ export function RootProvider({ children }: RootProviderProps) {
   const router = useRouter()
 
   useEffect(() => {
-    router.push({
-      pathname: '/',
-      query: {
-        ...router.query,
-        page: router.query.filter === filter ? router.query.page : '1',
-        filter: filter,
-      },
-    })
+    if (filter) {
+      router.push({
+        pathname: '/',
+        query: {
+          ...router.query,
+          page: router.query.filter === filter ? router.query.page : '1',
+          filter,
+        },
+      })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter])
 

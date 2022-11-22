@@ -19,7 +19,7 @@ export default function Home({ wines, totalItems, totalPages }: HomeProps) {
   const { setWine } = useRoot()
 
   const isDesktop = Boolean(width && width >= 1200)
-  const isMobile = Boolean(width && width <= 480)
+  const isMobile = Boolean(width && width <= 1199)
 
   function handlePageClick(e: any) {
     router.push({
