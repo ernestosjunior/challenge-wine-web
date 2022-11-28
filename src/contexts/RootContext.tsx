@@ -30,10 +30,16 @@ export function RootProvider({ children }: RootProviderProps) {
           filter,
         },
       })
-      setFilter(String(router.query.filter))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter])
+
+  useEffect(() => {
+    if (!filter && router.query.filter) {
+      setFilter(String(router.query.filter))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query])
 
   return (
     <RootContext.Provider value={{ filter, setFilter, wine, setWine }}>
