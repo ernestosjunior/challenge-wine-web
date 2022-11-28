@@ -38,6 +38,9 @@ export function RootProvider({ children }: RootProviderProps) {
     if (!filter && router.query.filter) {
       setFilter(String(router.query.filter))
     }
+    if (!router.query.filter) {
+      setFilter('')
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
